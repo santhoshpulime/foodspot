@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>orders history</title>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
+
+</head>
+<style type="text/css">
+	#status-p{
+		color: red;
+		font-size: 20px;
+
+	}
+	@media only screen and (min-width:450px){
+}
+</style>
+<body>
+
+
+	<div>
+		{% for i in orders %}
+		<p>Item : {{i.item_name}}</p>
+		<p>Cost : {{i.item_cost}}</p>
+		<p>Quan : {{i.something}}</p>
+		<p>code : {{i.code}}</p>
+		<p>Bill : {{i.finalbill}}</p>
+		<p>Date : {{i.DateTimeField}}</p>
+		<p id="status-p">Status :{{i.accepted}}--------{{i.confirmorder_by_restaurant}}</p><br><br><br>
+		{% endfor %}
+	</div>
+
+</body>
+</html>

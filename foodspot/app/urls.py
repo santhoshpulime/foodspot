@@ -1,0 +1,40 @@
+from django.urls import path,include
+from . import views
+urlpatterns = [
+   path('',views.home,name='home'),
+   path('signup_user/',views.signup_user,name='signup_user'),
+   path('login_user/',views.login_user,name='login_user'),
+   path('restaurant_signup/',views.restaurant_signup,name='restaurant_signup'),
+   path('restaurant_home/',views.restaurant_home,name='restaurant_home'),
+   path('restaurant_login/',views.restaurant_login,name='restaurant_login'),
+   path('restaurant_addproduct/',views.restaurant_addproduct,name='restaurant_addproduct'),
+   path('show_category',views.show_category,name='show_category'),
+   path('delete_category',views.delete_category,name='delete_category'),
+   path('add_item',views.add_item,name='add_item'),
+   path('show_items_to_restaurant',views.show_items_to_restaurant,name='show_items_to_restaurant'),
+   path('<int:id>/user_to_restaurant_details',views.user_to_restaurant_details,name='user_to_restaurant_details'),
+   path('<int:id>/bookitems',views.bookitems,name='bookitems'),
+   path('cart',views.cart,name='cart'),
+   path('history_orders',views.history,name='history_orders'),
+   path('restaurant_profile',views.restaurant_profile,name='restaurant_profile'),
+   path('userprofile',views.userprofile,name='userprofile'),
+
+   ##ajax 
+   path('user_to_restaurant_category_details_ajax',views.user_to_restaurant_category_details_ajax,name='user_to_restaurant_category_details_ajax'),
+   path('bookitems_ajax',views.bookitems_ajax,name='bookitems_ajax'),
+   path('excecute_order',views.excecute_order,name='excecute_order'),
+   path('show_orders_ajax',views.show_orders_ajax,name='show_orders_ajax'),
+   path('totalcost_display_for_item',views.totalcost_display_for_item,name='totalcost_display_for_item'),
+   path('addtocart',views.addtocart,name='addtocart'),
+   path('deleteitem',views.deleteitem,name='deleteitem'),
+   path('cart_ajax',views.cart_ajax,name='cart_ajax'),
+   path('deletebookeditem',views.deletebookeditem,name='deletebookeditem'),
+   path('ordercode',views.ordercode,name='ordercode'),
+   path('show_orders_to_restaurant',views.show_orders_to_restaurant,name='show_orders_to_restaurant'),
+   path('confirmorder_restaurant_ajax',views.confirmorder_restaurant_ajax,name='confirmorder_restaurant_ajax'),
+   path('item_not_yet_ajax',views.item_not_yet_ajax,name='item_not_yet_ajax'),
+   path('order_rejected_ajax',views.order_rejected_ajax,name='order_rejected_ajax'),
+   path('searchitem',views.searchitem,name='searchitem'),
+   path('restaurant_status',views.restaurant_status,name='restaurant_status'),
+
+]

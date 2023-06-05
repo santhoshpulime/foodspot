@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Restaurant-signup</title>
+</head>
+
+
+<style type="text/css">
+	#title-head{
+	display: block;
+	border: solid lightcoral 2px;
+	background: lightcoral;
+
+}
+body{
+	margin: 0px;
+}
+
+h1{
+	font-size: 40px;
+	font-family: monospace;
+	text-align: center;
+	color: black;
+}
+
+#form-container{
+	display: flex;
+	justify-content: center;
+	margin-top: 10%;
+	
+	border: solid #c4c4c4 1px;
+	margin-left: 100px;
+	margin-right: 100px;
+	margin-top: 20px;
+	padding-top: 50px;
+	padding-bottom: 50px;
+	border-radius: 8px;
+	box-shadow: 1px 1px 15px 1px #c4c4c4;
+}
+input{
+	box-sizing: border-box;
+	width: 100%;
+	display: flex;
+	border-radius: 8px;
+	border: 1px solid #c4c4c4;
+	padding: 1em;
+	height: 37px;
+
+	
+}
+
+#one{
+	float: left;
+
+}
+#two{
+	float: left;
+	margin-left: 20px;
+}
+
+#three{
+	float: left;
+}
+
+#four{
+	float: left;
+	margin-left: 20px;
+}
+
+#five{
+	float: left;
+}
+
+#six{
+	float: left;
+	margin-left: 20px;
+}
+
+#seven{
+	float: left;
+}
+
+
+#eight{
+	float: left;
+	margin-left: 20px;
+}
+
+#create-p{
+	font-size: 25px;
+}
+#create-account-btn{
+	border: solid lightcoral 1px ;
+	border-radius: 8px;
+	background: white;
+	width: 200px;
+	height: 40px;
+	font-size: 15px;
+	margin-left: 25%;
+	background: lightcoral;
+	color: white;
+}
+
+</style>
+
+
+<body>
+<div id="title-head">
+	<h1>FoodSpot<br></h1>
+	
+</div>
+
+
+<div id="form-container" >
+
+	<form method="post" enctype='multipart/form-data'>
+		{% csrf_token %}
+
+			<p id="create-p">Create Your Restaurant Account</p>
+		
+
+
+	<div id="one">
+		<input type="text" name="restaurant_name" id="restaurant_name" placeholder="Restaurant Name"><br>
+	</div>
+
+
+
+	<div id="two">
+		<input type="password" name="password" id="password" placeholder="Password"><br>
+	</div>
+
+
+<div id="three-four-container">
+	<div id="three">
+		<input type="text" name="phonenumber" id="phonenumber"placeholder="Phone number"><br>
+	</div>
+
+
+
+	<div id="four">
+		<input type="email" name="email" id="email"placeholder="Email"><br>
+	</div>
+
+</div>
+
+
+<div id="five-six-container">
+	<div id="five">
+		<input type="text" name="state" id="state" placeholder="State"><br>
+	</div>
+
+
+	<div id="six">
+		<input type="text" name="city" id="city" placeholder="city"><br>
+	</div>
+
+</div>
+
+	<div id="seven">
+		<input type="text" name="address" id="address" placeholder="Address"><br>
+	</div>
+
+
+
+	<div id="eight">
+		<input type="file" name="logo" id="logo"><br>
+	</div>
+
+
+	<div id="nine">
+		<input type="text" name="about" id="about" placeholder="About Restaurant"><br>
+	</div>
+		
+				{% for i in messages %}
+			{{i}}<br>
+		{% endfor %}
+		<button id="create-account-btn">Create Account</button>
+	</form>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,159 @@
+1<!DOCTYPE html>
+<html>
+<head>
+	<title>carts</title>
+				<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
+
+</head>
+<style type="text/css">
+	h1{
+		text-align: center;
+	}
+
+#inner-container{
+	
+	
+	font-size: 15px;
+	font-style: initial;
+
+}
+
+#cancel-btn{
+	width: 50%;
+	height: 30px;
+	border:solid lightcoral 1px;
+	border-radius: 5px;
+	font-size: 16px;
+	background: white;
+}
+
+#confirm-btn{
+	width: 100%;
+	height: 50px;
+	font-size: 20px;
+
+}
+#totalcost-orders{
+	font-size: 20px;
+	font-family: monospace;
+}
+
+
+#orders-container{
+	height: 470px;
+	overflow: scroll;
+	margin-left: 20px;
+}
+
+
+#username{
+	display: none;
+}
+#cart-div{
+	border: solid lightcoral 2px;
+	text-align: center;
+	background: lightcoral;
+	font-size: 20px;
+	font-family: monospace;
+}
+body{
+	margin:0px;
+}
+span{
+	font-size: 20px;
+	color: green;
+}
+@media only screen and (min-width:450px){
+}
+</style>
+<body>
+<div id="cart-div">
+	<h1>Cart</h1>
+</div>
+	<input type="text" id="username" value="">
+	{% csrf_token %}
+<div id="orders-container">
+	
+</div>
+
+<div id="confirm-div">
+	<p id="totalcost-orders"></p>
+	<button id="confirm-btn">Confirm Order</button>
+</div>
+<input type="text" id="totalinput">
+</body>
+
+
+
+
+<script type="text/javascript">
+	
+
+
+$(document).on('click','body',function(){
+
+			let csf= $('input[name=csrfmiddlewaretoken]').val()
+			mydata = {csrfmiddlewaretoken:csf}
+		$.ajax({
+			type:'POST',
+			url:'/cart_ajax',
+			data:mydata,
+			success:function(data){
+				$('#username').val(data.username)
+				$('#orders-container').empty()
+				$('#totalcost-orders').text('Total bill:'+data.total+'Rs')
+				$('#orders-container').append(temp)
+				$('#totalinput').val(data.total)
+				for(var i in data.orders){
+					var temp = '<div id="inner-container"><p id="itemname">'+'Item Name :'+data.orders[i].item_name+'</p><p id="itemcost">'+'Item Cost :'+data.orders[i].item_cost+'</p><p id="itemquantity">'+'Quantity :'+data.orders[i].something+'</p><p id="totalcost">'+'Total cost :'+data.orders[i].totalcost+'</p><p id="code">'+'Order Code :'+data.orders[i].code+'</p><input type="button" id="cancel-btn" value="cancel" btn-id='+data.orders[i].id+'></div>'
+					$('#orders-container').append(temp)
+				}
+			}
+		})
+	})
+
+
+
+$(document).on('click','#cancel-btn',function(){
+	btn = $(this).attr('btn-id')
+		let csf= $('input[name=csrfmiddlewaretoken]').val()
+	mydata={csrfmiddlewaretoken:csf,btn:btn}
+	$.ajax({
+		type:'POST',
+		url:'/deletebookeditem',
+		data:mydata,
+		success:function(data){
+
+		}
+	})
+
+})
+</script>
+
+
+
+
+<script type="text/javascript">
+	$(document).on('click','#confirm-btn',function(){
+		let ok = 'ok'
+		let username = $('#username').val()
+		$('#confirm-btn').hide()
+		temp = '<span>'+'orderplaced successfully..'+'</span>'
+		$('#confirm-div').append(temp)
+		let totalinput = $('#totalinput').val()
+
+				let csf= $('input[name=csrfmiddlewaretoken]').val()
+	mydata={csrfmiddlewaretoken:csf,ok:ok,username:username,totalbill:totalinput}
+	$.ajax({
+		type:'POST',
+		url:'/show_orders_ajax',
+		data:mydata,
+		success:function(data){
+
+		}
+	})
+
+	})
+</script>
+</html>

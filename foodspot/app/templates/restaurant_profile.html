@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>profile</title>
+</head>
+<style type="text/css">
+	h1{
+		text-align: center;
+	}
+	#username-p{
+		font-size: 20px;
+		font-family: monospace;
+	}
+	#state-p{
+		font-size: 20px;
+		font-family: monospace;
+	}	
+	#city-p{
+		font-size: 20px;
+		font-family: monospace;
+	}
+	#address-p{
+		font-size: 20px;
+		font-family: monospace;
+	}
+	#phonenumber-p{
+		font-size: 20px;
+		font-family: monospace;
+
+	}
+	#email-p{
+		font-size: 20px;
+		font-family: monospace;
+	}
+	#about_restaurant-p{
+		font-size: 20px;
+		font-family: monospace;
+	}
+	img{
+		width: 200px;
+		border-radius: 50%;
+	}
+
+
+		#title-head{
+	display: block;
+	border: solid lightcoral 2px;
+	background: lightcoral;
+
+}
+body{
+	margin: 0px;
+}
+h1{
+	font-size: 40px;
+	font-family: monospace;
+	text-align: center;
+	color: black;
+}
+#profile-div{
+		margin-left: 10%;
+		margin-top:5%;
+		
+	}
+#main-div{
+	display: flex;
+}
+#edit-data-div{
+	margin-left: 20%;
+	margin-top: 10%
+}
+input{
+	box-sizing: border-box;
+	width: 100%;
+	display: flex;
+	border-radius: 8px;
+	border: 1px solid #c4c4c4;
+	padding: 1em;
+	height: 37px;
+}
+#change-btn{
+	height: 37px;
+	width: 100%;
+	border:solid black 1px;
+	background: black;
+	border-radius: 5px;
+	color:white;
+	font-size: 17px;
+}
+</style>
+<body>
+
+
+
+<div id="title-head">
+		<h1>Profile</h1>
+</div>
+
+
+<div id="main-div">
+
+	<div id="profile-div">
+	
+		<img src="{{ r_data.logo.url }}">
+		<p id="username-p">Restaurant Name  : {{request.user}}</p>
+		<p id="state-p">State   : {{r_data.state}}</p>
+		<p id="city-p">City   :{{r_data.city}}</p>
+		<p id="address-p">Address  : {{r_data.address}}</p>
+		<p id="phonenumber-p">Phone Number  : {{r_data.phnnumber}}</p>
+		<p id="email-p">Email  : {{r_data.email}}</p>
+		<p id="about_restaurant-p">About Restaurant : {{r_data.about_restaurant}}</p>
+
+	</div>
+
+
+	<div id="edit-data-div">
+
+		<form method="post">
+			{% csrf_token %}
+			<input type="text" name="state" id="state" value="{{r_data.state}}"><br>
+			<input type="text" name="city" id="city" value="{{r_data.city}}"><br>
+			<input type="text" name="address" id="address" value="{{r_data.address}}"><br>
+			<input type="text" name="phonenumber" id="phonenumber" value="{{r_data.phnnumber}}"><br>
+			<input type="text" name="email" id="email" value="{{r_data.email}}"><br>
+			<input type="about_restaurant" name="about_restaurant" id="about_restaurant" value="{{r_data.about_restaurant}}"><br>
+
+			<button id="change-btn">Change</button>
+		</form>
+			
+		
+	</div>
+
+</div>
+
+</body>
+</html>

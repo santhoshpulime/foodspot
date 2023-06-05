@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>
+		Add-Food Item
+	</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
+</head>
+
+
+<style type="text/css">
+	#title-head{
+	display: block;
+	border: solid lightcoral 2px;
+	background: lightcoral;
+
+}
+body{
+	margin: 0px;
+}
+h1{
+	font-size: 40px;
+	font-family: monospace;
+	text-align: center;
+	color: black;
+}
+#add-category{
+	display: flex;
+	flex-direction: column;
+
+}
+#inner-add-category{
+	display: flex;
+	flex-direction: column;
+	margin: 20px 20px;
+	margin-left: 40px;
+}
+#category,#category_img{
+	box-sizing: border-box;
+	width: 70%;
+	display: block;
+	border-radius: 8px;
+	border: 1px solid #c4c4c4;
+	padding: 1em;
+	height: 37px;
+}
+#add-category-btn{
+	border: solid lightcoral 1px ;
+	border-radius: 8px;
+	background: white;
+	width: 70%;
+	height: 35px;
+	font-size: 15px;
+	
+	background: lightcoral;
+	color: white;
+}
+#itemcategory-p{
+	font-size: 25px;
+	color: lightcoral;
+}
+#ajax-category-showing-div{
+	display: flex;
+	margin-left: 20px;
+	font-size: 20px;
+	display: flex;
+}
+#show_category{
+	border: solid #c4c4c4 1px;
+	width: 200px;
+	height: 250px;
+	margin-left: 50px;
+	overflow-y: scroll;
+	display: flex;
+	flex-direction: column;
+
+}
+#ajax-category-showing-del-btn-div{
+	margin-top: 16px;
+
+}
+#ajax-category-showing-add-btn-div{
+	margin-top: 16px;
+
+}
+#add-category-btn-ajax{
+	margin-left: 20px;
+	border: solid #c4c4c4 1px;
+	border-radius: 2px;
+	
+}
+#del-category{
+	margin-left: 20px;
+	border: solid #c4c4c4 1px;
+	border-radius: 2px;
+	
+}
+#main-div{
+	display: flex;
+}
+#add-item-main-div{
+	margin-top: 10%;
+	display: flex;
+}
+
+#itemname,#cost,#aboutitem,#itemcategory,#itemimg{
+	width: 80%;
+	height: 37px;
+	display: block;
+	border: solid 1px #c4c4c4;
+	border-radius: 8px;
+	box-sizing: border-box;
+}
+#one{
+	float: right;
+}
+#two{
+	float: right;
+
+}
+#cid{
+	display: none;
+}
+
+#additem{
+	width: 200px;
+	height: 37px;
+	border: solid 1px lightcoral;
+	border-radius: 8px;
+	background: lightcoral;
+	color: white;
+	font-size: 18px;
+	margin-left: 50px;
+}
+#aboutitem{
+	height: 50px;
+	width: 90%;
+}
+#itemcategory{
+	width: 90%;
+}
+#show_items{
+margin-left: 10%;
+}
+#show-items-div{
+}
+#delete-btn-item{
+	width: 20%;
+	height: 20px;
+	border:solid red 1px;
+	border-radius: 5px;
+	background: white;
+	margin-left: 20px;
+	margin-top: 17px;
+}
+#edit-btn-item{
+	width: 20%;
+	height: 20px;
+		border:solid green 1px;
+	border-radius: 5px;
+		background: white;
+margin-left: 20px;
+	margin-top: 17px;
+
+}
+#itemname-ajax{
+	margin-left: 20px;
+}
+#itemcost-ajax{
+	margin-left: 20px;
+}
+#aboutitem-ajax{
+	margin-left: 20px;
+}
+</style>
+
+
+<body>
+<div id="title-head">
+	<h1>FoodSpot<br></h1>
+	
+</div>
+
+<div id="main-div"> 
+
+<div id="add-category">
+	<form method="post" enctype="multipart/form-data">
+		<div id="inner-add-category">
+			<p id="itemcategory-p"> Item Category</p>
+			{% csrf_token %}
+			<input type="text" name="category" id="category" placeholder="category ex:-juices,pizzas,etc.."><br>
+
+
+			<input type="file" name="category_img" id="category_img"><br>
+
+		<button id="add-category-btn">Add Category</button>
+	</div>
+</form>
+<div id="show_category">
+	<p id="loading"></p>
+</div>
+</div>
+
+
+
+<div id="add-item-main-div">
+	
+		<form id="item-add-form-ajax">
+			{% csrf_token %}
+<div id="one-two-container">
+	<div id="one">
+		<input type="text" name="cost" id="cost" placeholder="Cost"><br>
+	</div>
+	
+
+
+
+
+	<div id="two">
+			<input type="text" name="itemname" id="itemname" placeholder="Item Name"><br>
+	</div>
+</div>
+
+
+
+<div id="three-four-container">
+
+	<div id="three">
+			
+		
+	</div>
+
+
+	<div id="four">
+
+		<input type="text" name="itemcategory" id="itemcategory" placeholder="Item Category"><br>
+
+
+	</div>
+
+</div>
+
+
+<div id="five">
+
+	<input type="text" name="aboutitem" id="aboutitem" placeholder="About Item"><br>
+		<input type="text" name="cid" id="cid" placeholder="id"><br>
+
+</div>
+			<button id="additem">Add Item</button>
+
+		</form>
+	</div>
+	<div id="show_items">
+		
+	</div>
+</div>
+
+</body>
+alert
+
+
+
+<script type="text/javascript">
+	
+	//showing categories 
+	$(document).on('click','body',function(){
+		let csf= $('input[name=csrfmiddlewaretoken]').val()
+		mydata = {csrfmiddlewaretoken:csf}
+		$('.loading').hide()
+		$.ajax({
+			type:'POST',
+			url:'/show_category',
+			beforeSend:function(){
+					$('.loading').show()
+					$('.loading').text('Loading...')},
+			data:mydata,
+			success:function(data){
+				$('#show_category').empty()
+				for(var i in data.category_items){
+					var temp  = '<div id="ajax-category-showing-div"><p>'
+					+data.category_items[i].category_item
+
+					+'</p><div id="ajax-category-showing-del-btn-div"><input type="button" id="del-category" value="D" btn-category_id='
+
+					+data.category_items[i].id+'></div></p><div id="ajax-category-showing-add-btn-div"><input type="button" id="add-category-btn-ajax" value="A" btn-category_id='
+
+					+data.category_items[i].category_item+'></div></div>'
+					$('#show_category').append(temp)
+				}
+			}
+		
+		
+		})
+	})
+
+
+//show items
+$(document).on('click','#add-category-btn-ajax',function(){
+	
+	btn = $(this).attr('btn-category_id')
+	
+	$.ajax({
+		type:'POST',
+		url:'/show_items_to_restaurant',
+		data:{
+			'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+			'btn':btn
+		},
+		success:function(data){
+				$('#show_items').empty()
+				for(var i in data.items){
+					var temp = '<div id="show-items-div"><p id="itemname-ajax">'+
+					data.items[i].itemname+'</p><br><p id="itemcost-ajax">'+
+					data.items[i].itemcost+'Rs'+'</p><br><p id="aboutitem-ajax">'+
+					data.items[i].aboutitem+'</p><br><p id="itemcategory-ajax">'+
+					data.items[i].itemcategory+'</p><br><br><br><input type="button" id="delete-btn-item" value="Delete" btn-iid='+data.items[i].id+'><br><br><input type="button" id="edit-btn-item" value="Edit" btn-iid='+data.items[i].id+'></div>'
+
+
+					$('#show_items').append(temp)
+				}
+		}
+	})
+})
+</script>
+
+
+
+
+
+<style type="text/css">
+	#show-items-div{
+		display: flex;
+		
+
+	}
+</style>
+
+
+
+
+
+
+<script type="text/javascript">
+	
+
+//fill category div onclick on add-category btn
+$(document).on('click','#add-category-btn-ajax',function(){
+	
+	btn = $(this).attr('btn-category_id')
+	$('#itemcategory').val(btn)
+	let csf= $('input[name=csrfmiddlewaretoken]').val()
+	
+	mydata={csrfmiddlewaretoken:csf,btn:btn}
+})
+
+
+
+//delete category btn function
+$(document).on('click','#del-category',function(){
+	
+	btn = $(this).attr('btn-category_id')
+	
+	let csf= $('input[name=csrfmiddlewaretoken]').val()
+	mydata = {csrfmiddlewaretoken:csf,btn:btn}
+	$.ajax({
+		type:'POST',
+		url:'/delete_category',
+		data:mydata,
+		success:function(data){
+		}
+	})
+	
+})
+
+
+$(document).on('click','#delete-btn-item',function(){
+	btn = $(this).attr('btn-iid')
+	let csf= $('input[name=csrfmiddlewaretoken]').val()
+	mydata = {csrfmiddlewaretoken:csf,btn:btn}
+	$.ajax({
+		type:'POST',
+		url:'/deleteitem',
+		data:mydata,
+		success:function(data){
+		}
+	})
+})
+
+</script>
+
+
+
+<script type="text/javascript">
+//add item or product to database through ajax
+$(document).on('submit','#item-add-form-ajax',function(e){
+	e.preventDefault();
+	$.ajax({
+		type:'POST',
+		url:'/add_item',
+		data:{
+			'item_name' : $('#itemname').val(),
+			'item_cost' : $('#cost').val(),
+			'item_category' : $('#itemcategory').val(),
+			'about_item': $('#aboutitem').val(),
+			'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val()
+		},
+		success:function(data){
+		}
+	})
+})
+</script>
+
+</html>

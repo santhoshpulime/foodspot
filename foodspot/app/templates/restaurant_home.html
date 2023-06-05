@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>rhome</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
+
+</head>
+
+
+<style type="text/css">
+	
+#main-table-div{
+  border:1px solid black;
+  display: flex;
+  margin-left: 20px;
+}
+#inner-orders-div{
+	  display: flex;
+
+}
+
+#inner-orders-div{
+	margin-left: 20px;
+}
+
+
+#main-div{
+	display: block;
+	border: solid lightcoral 2px;
+	background: lightcoral;
+
+
+}
+
+
+
+
+
+
+
+
+body{
+	margin: 0px;
+}
+
+
+#logoname{
+	font-size: 30px;
+	font-family: monospace;
+	text-align: center;
+	color: black;
+}
+
+
+.username-p{
+	margin-right: 5%;
+}
+
+.item-p{
+	margin-right: 5%;
+}
+
+.cost-p{
+	margin-right: 5%;
+}
+
+.quan-p{
+	margin-right: 5%;
+}
+
+
+.datetime-p{
+	margin-right: 8%;
+}
+
+
+.bill-p{
+	margin-right: 5%;
+}
+
+#username{
+	margin-right: 5%;
+}
+
+
+#itemname{
+	margin-right: 5%;
+}
+
+
+#itemcost{
+	margin-right: 5%;
+}
+#quantity{
+	margin-right: 5%;
+}
+
+#time{
+	margin-right: 5%;
+}
+
+#finalbill{
+	margin-right: 5%;
+}
+
+#code{
+	margin-right: 5%;
+}
+
+#confirm-btn{
+	width: 10%;
+	height: 25px;
+	margin-right: 20px;
+	margin-top: 15px;
+	border:solid 1px black;
+	border-radius: 2px;
+	background: white;
+}
+#confirm-btn:hover{
+	background: black;
+	color: white;
+}
+
+#not-avai-btn{
+	width: 12%;
+	height: 25px;
+	margin-right: 20px;
+	border:solid 1px black;
+	border-radius: 2px;
+	background: white;
+	margin-top: 15px;
+}
+#not-avai-btn:hover{
+	background: black;
+	color: white;
+}
+#reject-btn{
+	width: 10%;
+	height: 25px;
+	margin-right: 20px;
+	border:solid 1px black;
+	border-radius: 2px;
+	background: white;
+	margin-top: 15px;
+}
+#reject-btn:hover{
+	background: black;
+	color: white;
+}
+#links-container{
+	margin-left: 20px;
+}
+#order-history-a{
+	margin-left: 20px;
+}
+#profile-a{
+	margin-left: 20px;
+}
+#searchitem{
+	box-sizing: border-box;
+	width: 20%;
+	border-radius: 8px;
+	border: 1px solid #c4c4c4;
+	padding: 1em;
+	height: 37px;
+	margin-left: 20px;
+}
+#links-container{
+	margin-top: 2px;
+	margin-bottom: 3px;
+}
+#additem-a{
+	text-decoration: none;
+	border:solid black 1px;
+	border-radius: 4px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+#order-history-a{
+	text-decoration: none;
+	border:solid black 1px;
+	border-radius: 4px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}#additem-a{
+	text-decoration: none;
+	border:solid black 1px;
+	border-radius: 4px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+#profile-a{
+	text-decoration: none;
+	border:solid black 1px;
+	border-radius: 4px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+
+#profile-a:hover{
+	background: black;
+	color: white;
+}
+#additem-a:hover{
+	background: black;
+	color: white;
+}
+#order-history-a:hover{
+	background: black;
+	color: white;
+}
+#opened-btn{
+	border:solid 1px black ;
+	border-radius: 5px;
+
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background: white;
+
+}
+#opened-btn:hover{
+	background: black;
+	color: white;
+}
+#closed-btn{
+	border:solid 1px black ;
+	border-radius: 5px;
+
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background: white;
+	margin-left: 10px;
+
+}
+#closed-btn:hover{
+	background: black;
+	color: white;
+}
+</style>
+
+<body>
+{% csrf_token %}
+<div id="main-div">
+	<p id="logoname">FoodSpot</p>
+</div>
+
+
+
+
+<div id="links-container">
+
+	<a href="{% url 'restaurant_addproduct' %}" id="additem-a">Add Item</a>
+	<a href="#" id="order-history-a">Orders-History</a>
+	<a href="{% url 'restaurant_profile' %}" id="profile-a">Profile</a>
+	<input type="text" name="searchitem" id="searchitem" placeholder="search by code..">
+	<button id="opened-btn">Opened</button>
+	<button id="closed-btn">Closed</button>
+</div>
+
+
+
+
+<div id="main-table-div">
+	<p class="username-p">User Name</p>
+	<p class="item-p">Item </p>
+	<p class="cost-p">Cost</p>
+	<p class="quan-p">Quan</p>
+	<p class="datetime-p">Date Time</p>
+	<p class="bill-p">Total Bill </p>
+	<p class="code-p">Code</p>
+
+
+</div>
+<div id="all_orders">
+	
+</div>
+
+</body>
+
+
+<script type="text/javascript">
+	$(document).on('click','#main-div',function(){
+		console.log('ok')
+		$.ajax({
+			type:'POST',
+			url:'/show_orders_to_restaurant',
+			data:{
+				'one':'one',
+				'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+
+			},
+			success:function(data){
+				console.log(data.bill)
+
+				$('#all_orders').empty()
+				for(var i in data.itemorders){
+					var temp = '<div id="inner-orders-div"><p id="username">'
+					+''+data.itemorders[i].username+
+					'<p><p id="itemname">'+''+data.itemorders[i].item_name+
+					'<p><p id="itemcost">'+''+data.itemorders[i].item_cost+
+					'<p><p id="quantity">'+''+data.itemorders[i].something+
+					'<p><p id="time">'+''+data.itemorders[i].DateTimeField+
+					'<p><p id="finalbill">'+''+data.itemorders[i].finalbill+'Rs'+
+					'<p><div id="code-div"><p id="code">'+''+
+					data.itemorders[i].code+'</p></div><br><br><input type="button" value="confirm order" id="confirm-btn" user-id='+
+					data.itemorders[i].id+'><input type="button" id="not-avai-btn" value="Item Not  Available" user-idnotbtn='
+					+data.itemorders[i].id+'><input type="button" id="reject-btn" value="Reject Order" user-idrejectbtn='
+					+data.itemorders[i].id+'></div><br><br>'
+					$('#all_orders').append(temp)
+				}
+			}
+		})
+	})
+
+
+
+
+
+	$(document).on('click','#confirm-btn',function(){
+		btn = $(this).attr('user-id')
+		alert(btn)
+		$.ajax({
+			type:'POST',
+			url:'/confirmorder_restaurant_ajax',
+			data:{
+				'btn':btn,
+				'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+
+
+			},
+			success:function(data){
+			}
+		})
+	})
+
+
+
+
+
+
+
+	$(document).on('click','#not-avai-btn',function(){
+		btn = $(this).attr('user-idnotbtn')
+		alert(btn)
+		$.ajax({
+			type:'POST',
+			url:'/item_not_yet_ajax',
+			data:{
+				'btn':btn,
+				'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+
+
+			},
+			success:function(data){
+			}
+		})
+	})
+
+
+
+
+
+		$(document).on('click','#reject-btn',function(){
+		btn = $(this).attr('user-idrejectbtn')
+		alert(btn)
+		$.ajax({
+			type:'POST',
+			url:'/order_rejected_ajax',
+			data:{
+				'btn':btn,
+				'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+
+
+			},
+			success:function(data){
+			}
+		})
+	})
+
+
+
+
+
+
+
+
+// search item script ajax
+
+$(document).on('keyup','#searchitem',function(){
+	var search = $('#searchitem').val()
+	$.ajax({
+		type:'POST',
+		url:'/searchitem',
+		data:{
+			'search':search,
+			'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+		},
+		success:function(data){
+			$('#all_orders').empty()
+				for(var i in data.itemorders){
+					var temp = '<div id="inner-orders-div"><p id="username">'
+					+''+data.itemorders[i].username+
+					'<p><p id="itemname">'+''+data.itemorders[i].item_name+
+					'<p><p id="itemcost">'+''+data.itemorders[i].item_cost+
+					'<p><p id="quantity">'+''+data.itemorders[i].something+
+					'<p><p id="time">'+''+data.itemorders[i].DateTimeField+
+					'<p><p id="finalbill">'+data.itemorders[i].finalbill+'Rs'+
+					'<p><div id="code-div"><p id="code">'+''+
+					data.itemorders[i].code+'</p></div><br><br><input type="button" value="confirm order" id="confirm-btn" user-id='+
+					data.itemorders[i].id+'><input type="button" id="not-avai-btn" value="Item Not  Available" user-idnotbtn='
+					+data.itemorders[i].id+'><input type="button" id="reject-btn" value="Reject Order" user-idrejectbtn='
+					+data.itemorders[i].id+'></div><br><br>'
+					$('#all_orders').append(temp)
+
+				}
+
+		}
+	})
+})
+
+
+
+
+
+
+
+
+$(document).on('click','#opened-btn',function(){
+	
+})
+
+
+
+
+
+
+</script>
+
+
+</html>

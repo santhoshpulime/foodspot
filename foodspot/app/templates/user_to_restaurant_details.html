@@ -1,0 +1,191 @@
+ 
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>restaurant</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+</head>
+
+
+<style type="text/css">
+
+body{
+	margin: 0px ;
+}
+#restaurant_name{
+	font-size: 30px;
+	margin: 0px 0px 0px 0px ;
+	font-family: monospace;
+	text-align: center;
+
+}
+
+
+
+#category_item_img{
+	width: 95%;
+	
+	border: solid 1px c4c4c4;
+	border-radius: 8px;
+	height: 200px;
+	
+
+}
+
+#p-category-name-div{
+	
+	
+
+	margin: 0 auto;
+	margin-left: 10px;
+
+
+
+}
+
+
+#inner-img-div{
+	position: relative;
+	margin-top: 30px;
+
+}
+
+
+#a-div{
+	position: absolute;
+	bottom: 0px;
+	background: rgb(0, 0, 0);
+	background: rgba(0, 0, 0, 0.5);
+	color: #f1f1f1;
+	width: 95%;
+	
+}
+
+a{
+	font-size: 20px;
+	color: white;
+	text-decoration: none;
+}
+input{
+	display: : none;
+}
+html {
+
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+}
+input{
+	display: none;
+}
+#restaurant-name-div{
+	border: solid lightcoral 2px ;
+	background: lightcoral;
+	padding-bottom: 20px
+}
+#p-category-name-div{
+	height: 750px;
+overflow: scroll;
+}	
+
+
+
+
+
+
+
+
+@media only screen and (min-width:450px){
+#p-category-namew;-div{
+	outline: 0 none
+}
+html {
+
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+}
+#category_item_img{
+			height: 300px;
+			width: 50%;
+
+		}
+#a-div{
+	width: 50%
+}
+#p-category-name-div{
+	margin-left: 35%;
+}
+
+	
+}
+</style>
+
+
+<body>
+
+
+
+
+	{% csrf_token %}
+			<input  type="text" id="rid" value="{{rid.id}}">
+<div id="main-div">
+	<div id="restaurant-name-div">
+		<p id="restaurant_name">{{restaurant_name}}</p>
+	</div>
+<input type="text" id="code_div">
+	<div id="restaurant_category_items">
+	
+		<div id="p-category-name-div">
+			{% for i in restaurant_categories %}
+			<a href="{% url 'bookitems' i.id %}"/>
+			<br>
+			<div id="inner-img-div">
+				<img id="category_item_img" src="{{i.category_item_img.url}}" ><br>
+				<div id="a-div">
+					<a href="#">{{i.category_item}}</a><br><br>
+
+				</div>
+			</div>
+
+			{% endfor%}
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript">
+	$(document).on('click','html',function(){
+		
+		let csf= $('input[name=csrfmiddlewaretoken]').val()
+		let rid = $('#rid').val()
+		mydata = {csrfmiddlewaretoken:csf,rid_id:rid}
+		
+		$.ajax({
+			type:'POST',
+			url:'/user_to_restaurant_category_details_ajax',
+			data:mydata,
+			success:function(data){
+				$('#p-category-name-di').empty()
+				console.log(data)
+				for(var i in data.restaurant_categories){
+					console.log(data.restaurant_categories[i].category_item)
+					var temp = '<div id="category-display-div"></div>'
+					$('#p-category-name-di').append(temp)
+
+				}
+			}
+			
+		})
+	})
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>items</title>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
+<script src="https://kit.fontawesome.com/ad82c2fb49.js" crossorigin="anonymous"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
+ 
+</head>
+
+
+<style>
+	#c_id{
+		display: none
+	}
+
+#restaurant_name_div{
+	border: solid lightcoral 2px;
+	text-align: center;
+	background: lightcoral;
+	font-size: 25px;
+	font-family: monospace;
+}
+#items_div{
+	border: solid white 2px;
+	margin-top: 20px;
+	height: 500px;
+	overflow: scroll;
+}
+#btnid{
+display: none;
+}
+body{
+	margin: 0px
+}
+
+#items_inner_div{
+	border: solid white 2px; 
+	margin-top: 20px;
+	border-radius: 5px;
+	box-shadow: 1px 1px 7px black;
+	margin-right: 20px;
+	margin-left: 20px;
+	font-family: monospace;
+
+}
+#itemname{
+	font-size: 20px;
+}
+
+
+
+#order_btn{
+
+	border:solid lightcoral 2px;
+	border-radius: 5px;
+	background: lightcoral;
+	width: 100px;
+	color: white;
+	height: 30px;
+	font-size: 17px;
+}
+#big-order-div{
+	position: fixed;
+	width: 330px;
+	height: 500px;
+	border: solid black 2px;
+	margin-left: 20px;
+  	display:none;
+	border-radius: 10px;
+	margin-top: 20px;
+	background: white;
+}
+
+#big-inner-div{
+	font-size: 25px;
+	text-align: center;
+	justify-content: center;
+}
+
+#aboutitem-big-inner{
+	font-size:15px;
+
+}
+
+#itemquantity{
+	height: 25px;
+	width: 50px;
+}
+
+#btn-continue{
+	width: 100%;
+	height: 45px;
+	font-size: 20px;
+	display:none ;
+}
+#addcart{
+	width: 50%;
+	height: 40px;
+	border:solid lightcoral 2px;
+	background: lightcoral;
+	border-radius: 4px;
+}
+#x{
+	border:solid white 2px;
+	background: white;
+	border-radius: 50%;
+}
+#ordercode-div{
+	border:solid white 2px ;
+
+	
+
+}
+#order_input{
+	display: none;
+}
+
+#ordercode-btn{
+	border:solid black 2px;
+	border-radius: 5px;
+	background: black;
+	color: white;
+	width: 90%;
+	height: 35px;
+	margin-left: 5%;
+	font-size: 20px
+}
+
+	@media only screen and (min-width:450px){
+
+}
+}
+</style>
+
+
+<body onload="ordercodehide()">
+{% csrf_token %}
+
+<div id="restaurant_name_div">
+	
+	<p>{{name}}</p>
+
+
+</div>
+
+<a href="{% url 'home' %}"><i class="fa-solid fa-house"></i> </a>
+<a href="{% url 'history_orders'%}"><i class="fa-solid fa-bag-shopping"></i> </a>
+<a href="#">fav</a>
+<input type="text" name='c_id' id="c_id" value="{{cid.id}}">
+<input type="text" id="btnid">
+
+<div id="ordercode-div">
+	<p>click the below button to create order code..</p>
+	<button id="ordercode-btn">order code </button>
+</div>
+
+
+
+
+<div id="big-order-div">
+	{% csrf_token %}
+<button id="x">X</button>
+<br><br><br>
+
+</div>
+
+
+
+<div id="items_div">
+
+</div>
+
+<div id="continue-btn-div">
+	<a href="{% url 'cart' %}"><button id="btn-continue">continue</button></a>
+</div>
+</body>
+
+
+<input type="text" id="order_input" value="{{order_code}}">
+<script type="text/javascript">
+
+
+function ordercodehide(){
+	mydata = document.getElementById("order_input").value;
+	if (mydata == "existed"){
+		$('#ordercode-div').hide()
+		$('#restaurant_name_div').show()
+	}
+	else{
+	}
+
+	}
+
+
+
+
+
+
+
+$('#restaurant_name_div').hide()
+$(document).on('click','#ordercode-btn',function(){
+	$('#restaurant_name_div').show()
+	$('#ordercode-div').hide()
+	let csf= $('input[name=csrfmiddlewaretoken]').val()
+	mydata = {csrfmiddlewaretoken:csf}
+	alert('your code created successfully..')
+
+	$.ajax({
+		type:'POST',
+		url:'/ordercode',
+		data:mydata,
+		success:function(data){
+			console.log(data.status)
+		}
+	})
+
+})
+
+$(document).on('click','#restaurant_name_div',function(){
+	let csf= $('input[name=csrfmiddlewaretoken]').val()
+	let cid = $('#c_id').val()
+		mydata = {csrfmiddlewaretoken:csf,cid:cid}
+
+		$.ajax({
+			type:'POST',
+			url:'/bookitems_ajax',
+			data:mydata,
+			success:function(data){
+				console.log(data)
+				$('#items_div').empty()
+				for(var i in data.items){
+					var temp = '<div id="items_inner_div"><p id="itemname">'
+					+data.items[i].itemname+'</p><p id="itemcost">'
+					+data.items[i].itemcost+'Rs'+'</p><p>'
+					+data.items[i].aboutitem+'<p><input type="button" value="Order" id="order_btn" btn-order-id='+data.items[i].id+'></div>'
+					
+
+
+					$('#items_div').append(temp)
+				}
+			}
+		})
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$(document).on('click','#order_btn',function(){
+	btn = $(this).attr('btn-order-id')
+	let csf= $('input[name=csrfmiddlewaretoken]').val()
+	inputvalue = $('#btnid').val(btn)
+	btn_input=$('#btnid').val()
+
+	$('#big-order-div').show()
+
+
+
+	mydata = {csrfmiddlewaretoken:csf,btnid:btn_input}
+	
+
+
+
+
+
+
+
+
+	$.ajax({
+		type:'POST',
+		url:'/excecute_order',
+		data:mydata,
+		success:function(data){
+				$('#big-order-div').empty()
+			for (var i in data.item_filter){
+				var temp = '<button id="x">'+'X'+'</button><div id="big-inner-div"><p>'+'Item Name  :  '+data.item_filter[i].itemname+'</p><p>'+'Item Cost  :  '+data.item_filter[i].itemcost+'Rs'+'</p><p id="aboutitem-big-inner">'+'About Item  :  '+data.item_filter[i].aboutitem+'</p><input type="text" id="itemquantity" placeholder="quan.."'+'><p id="totalcost">'+'Total Cost'+'</p><button id="addcart">'+'Add Cart'+'</button></div>'
+				$('#big-order-div').append(temp)
+			}
+			
+		}
+	})
+
+})
+
+
+$(document).on('click','#x',function(){
+		$('#big-order-div').hide()
+
+})
+
+
+$(document).on('keyup','#itemquantity',function() {
+		btn_input=$('#btnid').val()
+		itemquantity=$('#itemquantity').val()
+		let csf= $('input[name=csrfmiddlewaretoken]').val()
+
+		mydata={itemquantity:itemquantity,btnid:btn_input,csrfmiddlewaretoken:csf}
+		console.log(btn_input,itemquantity)
+
+		$.ajax({
+			type:'POST',
+			url:'/totalcost_display_for_item',
+			data:mydata,
+			success:function(data){
+				$('#totalcost').html('Total Cost:'+data.cost)
+			}
+		})
+})
+
+
+
+</script>
+
+
+
+
+
+<script type="text/javascript">
+	$(document).on('click','#addcart',function(){
+		btn_input = $('#btnid').val()
+		
+		let csf= $('input[name=csrfmiddlewaretoken]').val()
+		itemquantity=$('#itemquantity').val()
+
+		mydata={itemquantity:itemquantity,btnid:btn_input,csrfmiddlewaretoken:csf}
+
+
+		$('#big-order-div').hide()
+		$('#btn-continue').show()
+
+
+		$.ajax({
+			type:'POST',
+			url:'/addtocart',
+			data:mydata,
+			success:function(data){
+				console.log('ok')
+			}
+
+		})
+	})
+</script>
+
+</html>

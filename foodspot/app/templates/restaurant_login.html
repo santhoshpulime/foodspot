@@ -1,0 +1,140 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
+	<title>Restaurant-Login</title>
+</head>
+
+
+
+
+
+<style type="text/css">
+input{
+	box-sizing: border-box;
+	width: 100%;
+	display: block;
+	border-radius: 8px;
+	border: 1px solid #c4c4c4;
+	padding: 1em;
+	height: 37px;
+}
+h1{
+	font-size: 40px;
+	font-family: monospace;
+	text-align: center;
+	color: black;
+}
+#form-input-btn-div{
+
+	margin-top: 70px;
+	display: flex;
+	flex-direction: column;
+	display: inline-flex;
+	
+	padding: 0px 20px 20px 20px;
+	border: solid white 2px ;
+	border-radius: 8px;
+	box-shadow: 1px 1px 15px 1px lightgray;
+	
+
+}
+body{
+	text-align: center;
+	
+}
+
+input{
+	width: 270px;
+	font-size: 15px;
+	
+}
+button{
+	border: solid lightcoral 1px;
+	border-radius: 8px;
+	background: white;
+	
+	height: 32px;
+
+	color: lightcoral;
+	font-size: 18px;
+	
+	color: lightcoral;
+	width: 270px;
+}
+a{
+	text-decoration: none;
+	color: lightcoral;
+	border: solid lightcoral 1px ;
+	border-radius: 8px;
+	height: 25px;
+	margin-top: 5px;
+	padding-top: 5px;
+
+
+}
+#title-head{
+	display: block;
+	border: solid lightcoral 2px;
+	background: lightcoral;
+
+}
+body{
+	margin: 0px;
+}
+
+#quote{
+	font-size: 12px;
+	color: black;
+	font-family: all;
+}
+#login-id{
+	font-size: 30px;
+	color: lightcoral;
+}
+	@media only screen and (min-width:300px){
+		
+	
+	}
+</style>
+
+
+
+
+
+<body>
+	<div id="title-head">
+	<h1>FoodSpot<br></h1>
+	
+</div>
+	<div id="container-all">
+<form method="post">
+
+	{% csrf_token %}
+	<div id="form-input-btn-div">
+		<p id="login-id">Login</p>
+		<input type="text" name="restaurantname" id="username" placeholder="Restaurant Name"><br>
+
+	
+
+		<input type="password" name="password" id="password" placeholder="Password"><br>
+
+		
+
+	
+
+
+		
+{% for i in messages %}
+			{{i}}<br>
+		{% endfor %}
+		<button>Login</button>
+		<span>or</span>
+		<a href="{% url 'signup_user' %}">Sign Up</a>
+	</div>
+</form>
+</div>
+</body>
+</html>

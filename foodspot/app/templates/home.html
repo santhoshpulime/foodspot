@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Home</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
+
+</head>
+
+<style type="text/css">
+	html {
+
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+}
+	#title-head{
+	display: block;
+	border: solid lightcoral 2px;
+	background: lightcoral;
+
+}
+body{
+	margin: 0px;
+}
+h1{
+	font-size: 40px;
+	font-family: monospace;
+	text-align: center;
+	color: black;
+}
+#restaurants-div{
+	
+	
+
+	margin: 0 auto;
+	margin-left: 10px;
+
+
+
+}
+#logo{
+	width: 95%;
+	
+	border: solid 1px c4c4c4;
+	border-radius: 8px;
+	height: 200px;
+	
+
+}
+#inner-restaurant-div{
+	position: relative;
+	margin-top: 30px;
+
+}
+#p-div{
+	position: absolute;
+	bottom: 0px;
+	background: rgb(0, 0, 0);
+	background: rgba(0, 0, 0, 0.5);
+	color: #f1f1f1;
+	width: 90%;
+	
+}
+#restaurant_name{
+	font-size: 25px;
+}
+#restaurants-div{
+	height: 500px;
+	overflow: scroll;
+}
+
+
+@media only screen and (min-width:450px){
+		#logo{
+			height: 300px;
+			width: 80%;
+
+		}
+		#p-div{
+			width: 65%;
+		}
+		#restaurants-div{
+			margin-left: 10px;
+		}
+		#restaurants-div{
+	height: 500px;
+	overflow: scroll;
+}
+html {
+
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+}
+	}
+</style>
+
+
+<body>
+<div id="main-div">
+	<div id="title-head">
+		<h1>FoodSpot<br></h1>	
+	</div>
+
+	<div id="nav-bar-div">
+
+
+			<a href="{% url 'home' %}">home</a>
+		<a href="{% url 'history_orders'%}">orders-history </a>
+		<a href="#">fav</a>
+
+
+
+	</div>
+
+
+	<div id="restaurants-div">
+		{% for i in restaurants %}
+		<a href="{% url 'user_to_restaurant_details' i.id  %}">
+		<div id="inner-restaurant-div">
+		<img src="{{i.logo.url}}" width="310px" height="150px" id="logo">
+		
+		<div id="p-div">
+			<p id="restaurant_name">{{i.restaurant_name}}</p>
+			<p id="about_restaurant">{{i.about_restaurant}}</p><br>
+
+		</div>
+
+	</div>
+</a>
+		{% endfor %}
+	</div>
+
+</div>
+
+
+</body>
+</html>

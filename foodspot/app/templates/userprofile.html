@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Profile</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
+
+</head>
+<style type="text/css">
+	input{
+	box-sizing: border-box;
+	width: 90%;
+	display: flex;
+	border-radius: 8px;
+	border: 1px solid #c4c4c4;
+	padding: 1em;
+	height: 37px;
+	margin-left: 5%;
+	margin-top: 5%
+}
+h1{
+	text-align: center;
+}
+#form-div{
+	margin-top: 10%
+}
+#change-btn{
+	width: 90%;
+	margin-left: 5%;
+	margin-top: 5%;
+	border:solid black 1px;
+	background: black;
+	border-radius: 5px;
+	font-size: 20px;
+	color:white;
+	height: 37px;
+
+}
+#data-div{
+	text-align: center;
+}
+</style>
+<body>
+	<div>
+		<h1>Profile</h1>
+	</div>
+
+	<div id="data-div">
+
+		<p>UserName : {{user_details.username}}</p>
+		<p>State : {{user_details.state}}</p>
+		<p>City : {{user_details.city}}</p>
+
+		<p>Address : {{user_details.address}}</p>
+		<p>PhoneNumber : {{user_details.phnnumber}}</p>
+
+		
+	</div>
+
+	<div id="form-div">
+
+		<form method="post">
+			{% csrf_token%}
+			<input type="text" name="state" id="state" value="{{user_details.state}}">
+			<input type="text" name="city" id="city" value="{{user_details.city}}">
+			<input type="text" name="address" id="address" value="{{user_details.address}}">
+			<input type="text" name="phonenumber" id="phnnumber" value="{{user_details.phnnumber}}">
+			<button id="change-btn">change</button>
+		</form>
+				
+
+	</div>
+</body>
+</html>
